@@ -1945,6 +1945,11 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
                 text: t("labels.arrowtype_elbowed"),
                 icon: elbowArrowIcon,
                 testId: "elbow-arrow",
+              }, {
+                value: ARROW_TYPE.custom,
+                text: "Custom arrow",
+                icon: sharpArrowIcon,
+                testId: "custom-arrow",
               },
             ]}
             value={getFormValue(
