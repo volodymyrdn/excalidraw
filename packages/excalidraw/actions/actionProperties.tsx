@@ -1762,6 +1762,7 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
               }
             : null,
         elbowed: value === ARROW_TYPE.elbow,
+        custom: value === ARROW_TYPE.custom,
         angle: value === ARROW_TYPE.elbow ? (0 as Radians) : el.angle,
         points:
           value === ARROW_TYPE.elbow || el.elbowed
