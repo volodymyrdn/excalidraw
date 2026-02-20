@@ -1946,9 +1946,10 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
                 text: t("labels.arrowtype_elbowed"),
                 icon: elbowArrowIcon,
                 testId: "elbow-arrow",
-              }, {
+              },
+              {
                 value: ARROW_TYPE.custom,
-                text: "Custom arrow",
+                text: t("labels.arrowtype_custom"),
                 icon: sharpArrowIcon,
                 testId: "custom-arrow",
               },
@@ -1958,7 +1959,9 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
               app,
               (element) => {
                 if (isArrowElement(element)) {
-                  return element.elbowed
+                  return element.custom
+                    ? ARROW_TYPE.custom
+                    : element.elbowed
                     ? ARROW_TYPE.elbow
                     : element.roundness
                     ? ARROW_TYPE.round
