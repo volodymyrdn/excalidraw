@@ -149,6 +149,12 @@ export const isCurvedArrow = (
   );
 };
 
+export const isCustomArrow = (
+  element?: ExcalidrawElement,
+): element is ExcalidrawArrowElement => {
+  return isArrowElement(element) && element.custom;
+};
+
 export const isLinearElementType = (
   elementType: ElementOrToolType,
 ): boolean => {
