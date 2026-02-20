@@ -46,6 +46,7 @@ import { elementWithCanvasCache } from "./renderElement";
 
 import {
   canBecomePolygon,
+  isCustomArrow,
   isElbowArrow,
   isEmbeddableElement,
   isIframeElement,
