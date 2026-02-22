@@ -1789,6 +1789,8 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
                 ),
               ]
             : el.points,
+        startArrowhead: value === ARROW_TYPE.custom ? "custom" : el.startArrowhead !== 'custom' ? el.startArrowhead : null,
+        endArrowhead: value === ARROW_TYPE.custom ? "custom" : el.endArrowhead !== 'custom' ? el.endArrowhead : "arrow",
       });
 
       if (isElbowArrow(newElement)) {
