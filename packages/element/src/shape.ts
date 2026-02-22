@@ -335,36 +335,35 @@ const getArrowheadShapes = (
     ? applyDarkModeFilter(element.strokeColor)
     : element.strokeColor;
 
-  if (isCustomArrow(element)) {
-    const [x, y, x2, y2, x3, y3] = arrowheadPoints;
-
-    // always use solid stroke for arrowhead
-    delete options.strokeLineDash;
-
-    return [
-      generator.polygon(
-        [
-          [x, y],
-          [x2, y2],
-          [x3, y3],
-          [x, y],
-        ],
-        {
-          ...options,
-          fill:
-            position === "start"
-              ? "white"
-              : position === "end"
-                ? "#A0522D"
-                : strokeColor,
-          fillStyle: "solid",
-          roughness: Math.min(1, options.roughness || 0),
-        },
-      ),
-    ];
-  }
-
   switch (arrowhead) {
+    case "custom": {
+      const [x, y, x2, y2, x3, y3] = arrowheadPoints;
+
+      // always use solid stroke for arrowhead
+      delete options.strokeLineDash;
+
+      return [
+        generator.polygon(
+          [
+            [x, y],
+            [x2, y2],
+            [x3, y3],
+            [x, y],
+          ],
+          {
+            ...options,
+            fill:
+              position === "start"
+                ? "white"
+                : position === "end"
+                  ? "rgb(160, 82, 45)"
+                  : strokeColor,
+            fillStyle: "solid",
+            roughness: Math.min(1, options.roughness || 0),
+          },
+        ),
+      ];
+    }
     case "dot":
     case "circle":
     case "circle_outline": {
