@@ -788,27 +788,45 @@ const _generateElementShape = (
         : [pointFrom<LocalPoint>(0, 0)];
 
       if (isCustomArrow(element)) {
+        // arrow start and end points
         const [ps, pe] = points;
 
+        // arrow length
         const arrowLength = pointDistance(ps, pe);
 
-        // Scale down the arrowbody until we hit a certain size so that it doesn't look weird.
-        const strokeWidth = Math.min(14, arrowLength * 0.2);
+        // make an offset from arrow start and end 
         const offset = Math.min(20, arrowLength * 0.4);
         const t = offset / arrowLength;
 
         // direction vector from start to end point, used to calculate the position of the lines
         const dv = pointFrom(pe[0] - ps[0], pe[1] - ps[1]);
-        
+
+        // get new stat and end (with offset), and the middle point
         const p1 = pointFrom(ps[0] + dv[0] * t, ps[1] + dv[1] * t);
         const pm = pointFrom(ps[0] + dv[0] * 0.5, ps[1] + dv[1] * 0.5);
         const p2 = pointFrom(ps[0] + dv[0] * (1 - t), ps[1] + dv[1] * (1 - t));
+        const [x1, y1] = p1;
+        const [xm, ym] = pm;
+        const [x2, y2] = p2;
 
-        const s1 = generator.line(ps[0], ps[1], pe[0], pe[1], options);
-        const s2 = generator.line(p1[0], p1[1], p2[0], p2[1], { ...options, strokeWidth: strokeWidth + 2, stroke: "black" });
-        const s3 = generator.line(p1[0], p1[1], pm[0], pm[1], { ...options, strokeWidth: strokeWidth, stroke: "white" });
-        const s4 = generator.line(pm[0], pm[1], p2[0], p2[1], { ...options, strokeWidth: strokeWidth, stroke: "rgb(160, 82, 45)" })
-        shape = [s1, s2, s3, s4];
+        const arrowWidth = 10;
+
+        // calculate the corner points of the arrow's body
+        const deltaX = ((y2 - y1) / arrowLength) * arrowWidth;
+        const deltaY = ((x2 - x1) / arrowLength) * arrowWidth;
+        const c1 = pointFrom(x1 + deltaX, y1 - deltaY);
+        const c2 = pointFrom(x1 - deltaX, y1 + deltaY);
+        const c3 = pointFrom(xm - deltaX, ym + deltaY);
+        const c4 = pointFrom(xm + deltaX, ym - deltaY);
+        const c5 = pointFrom(x2 + deltaX, y2 - deltaY);
+        const c6 = pointFrom(x2 - deltaX, y2 + deltaY);
+
+        // first, draw a simple line, so that the arraw can take the proper width
+        const s0 = generator.line(ps[0], ps[1], pe[0], pe[1], { ...options, stroke: "white" });
+        // then, draw arrow's body
+        const s1 = generator.polygon([c3, c4, c5, c6], { ...options, fill: "rgb(160, 82, 45)", fillStyle: "solid" },);
+        const s2 = generator.polygon([c1, c2, c3, c4], { ...options, fill: "white", fillStyle: "solid" },);
+        shape = [s0, s1, s2];
       } else if (isElbowArrow(element)) {
         // NOTE (mtolmacs): Temporary fix for extremely big arrow shapes
         if (
