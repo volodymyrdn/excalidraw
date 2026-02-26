@@ -25,7 +25,11 @@ import {
   FONT_SIZES,
 } from "@excalidraw/common";
 
-import { canBecomePolygon, getNonDeletedElements } from "@excalidraw/element";
+import {
+  canBecomePolygon,
+  getNonDeletedElements,
+  isCustomArrow,
+} from "@excalidraw/element";
 
 import {
   bindBindingElement,
@@ -1667,6 +1671,14 @@ export const actionChangeArrowhead = register<{
   },
   PanelComponent: ({ elements, appState, updateData, app }) => {
     const isRTL = getLanguage().rtl;
+
+    // If any of selected elements is custom arrow, do not render arrow heads buttons
+    const selectedElements = elements.filter(
+      (el) => appState.selectedElementIds[el.id],
+    );
+    if (selectedElements?.some(isCustomArrow)) {
+      return null;
+    }
 
     return (
       <fieldset>
