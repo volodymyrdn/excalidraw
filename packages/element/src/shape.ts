@@ -791,7 +791,11 @@ const _generateElementShape = (
         const [ps, pe] = points;
 
         const arrowLength = pointDistance(ps, pe);
-        const t = 20 / arrowLength;
+
+        // Scale down the arrowbody until we hit a certain size so that it doesn't look weird.
+        const strokeWidth = Math.min(14, arrowLength * 0.2);
+        const offset = Math.min(20, arrowLength * 0.4);
+        const t = offset / arrowLength;
 
         // direction vector from start to end point, used to calculate the position of the lines
         const dv = pointFrom(pe[0] - ps[0], pe[1] - ps[1]);
@@ -801,9 +805,9 @@ const _generateElementShape = (
         const p2 = pointFrom(ps[0] + dv[0] * (1 - t), ps[1] + dv[1] * (1 - t));
 
         const s1 = generator.line(ps[0], ps[1], pe[0], pe[1], options);
-        const s2 = generator.line(p1[0], p1[1], p2[0], p2[1], { ...options, strokeWidth: 16, stroke: "black" });
-        const s3 = generator.line(p1[0], p1[1], pm[0], pm[1], { ...options, strokeWidth: 14, stroke: "white" });
-        const s4 = generator.line(pm[0], pm[1], p2[0], p2[1], { ...options, strokeWidth: 14, stroke: "rgb(160, 82, 45)", roughness: 0, bowing: 0 })
+        const s2 = generator.line(p1[0], p1[1], p2[0], p2[1], { ...options, strokeWidth: strokeWidth + 2, stroke: "black" });
+        const s3 = generator.line(p1[0], p1[1], pm[0], pm[1], { ...options, strokeWidth: strokeWidth, stroke: "white" });
+        const s4 = generator.line(pm[0], pm[1], p2[0], p2[1], { ...options, strokeWidth: strokeWidth, stroke: "rgb(160, 82, 45)" })
         shape = [s1, s2, s3, s4];
       } else if (isElbowArrow(element)) {
         // NOTE (mtolmacs): Temporary fix for extremely big arrow shapes
