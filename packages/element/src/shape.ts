@@ -796,7 +796,7 @@ const _generateElementShape = (
         const arrowLength = pointDistance(ps, pe);
 
         // make an offset from arrow start and end 
-        const offset = Math.min(20, arrowLength * 0.4);
+        const offset = Math.min(30, arrowLength * 0.4);
         const t = offset / arrowLength;
 
         // direction vector from start to end point, used to calculate the position of the lines
