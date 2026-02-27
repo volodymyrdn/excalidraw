@@ -789,7 +789,8 @@ const _generateElementShape = (
 
       if (isCustomArrow(element)) {
         // arrow start and end points
-        const [ps, pe] = points;
+        const ps = points[0];
+        const pe = points[points.length - 1];
 
         // arrow length
         const arrowLength = pointDistance(ps, pe);
