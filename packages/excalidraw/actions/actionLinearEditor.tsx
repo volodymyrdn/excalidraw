@@ -1,4 +1,5 @@
 import {
+  isCustomArrow,
   isElbowArrow,
   isLinearElement,
   isLineElement,
@@ -89,6 +90,10 @@ export const actionToggleLinearEditor = register({
     })[0] as ExcalidrawLinearElement;
 
     if (!selectedElement) {
+      return null;
+    }
+
+    if (isCustomArrow(selectedElement)) {
       return null;
     }
 
