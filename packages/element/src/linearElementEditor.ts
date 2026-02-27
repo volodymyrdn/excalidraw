@@ -758,6 +758,10 @@ export class LinearElementEditor {
     ) {
       return [];
     }
+    
+    if (isCustomArrow(element)) {
+      return [];
+    }
 
     const points = LinearElementEditor.getPointsGlobalCoordinates(
       element,
