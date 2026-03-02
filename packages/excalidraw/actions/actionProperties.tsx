@@ -1975,9 +1975,9 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
               },
               {
                 value: ARROW_TYPE.dataflow,
-                text: t("labels.arrowtype_custom"),
+                text: t("labels.arrowtype_dataflow"),
                 icon: sharpArrowIcon,
-                testId: "custom-arrow",
+                testId: "dataflow-arrow",
               },
             ]}
             value={getFormValue(
