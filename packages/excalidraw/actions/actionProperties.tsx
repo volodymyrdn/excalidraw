@@ -1774,10 +1774,10 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
               }
             : null,
         elbowed: value === ARROW_TYPE.elbow,
-        custom: value === ARROW_TYPE.custom,
+        dataflowArrow: value === ARROW_TYPE.custom,
         angle: value === ARROW_TYPE.elbow ? (0 as Radians) : el.angle,
         points:
-          value === ARROW_TYPE.custom || el.custom
+          value === ARROW_TYPE.custom || el.dataflowArrow
             ? [el.points[0], el.points[el.points.length - 1]]
             : value === ARROW_TYPE.elbow || el.elbowed
             ? [
@@ -1985,7 +1985,7 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
               app,
               (element) => {
                 if (isArrowElement(element)) {
-                  return element.custom
+                  return element.dataflowArrow
                     ? ARROW_TYPE.custom
                     : element.elbowed
                     ? ARROW_TYPE.elbow

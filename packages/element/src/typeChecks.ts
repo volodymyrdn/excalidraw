@@ -152,7 +152,7 @@ export const isCurvedArrow = (
 export const isDataflowArrow = (
   element?: ExcalidrawElement,
 ): element is ExcalidrawArrowElement => {
-  return isArrowElement(element) && element.custom;
+  return isArrowElement(element) && element.dataflowArrow;
 };
 
 export const isLinearElementType = (
