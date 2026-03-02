@@ -336,7 +336,7 @@ const getArrowheadShapes = (
     : element.strokeColor;
 
   switch (arrowhead) {
-    case "custom": {
+    case "dataflow": {
       const [x, y, x2, y2, x3, y3] = arrowheadPoints;
 
       // always use solid stroke for arrowhead

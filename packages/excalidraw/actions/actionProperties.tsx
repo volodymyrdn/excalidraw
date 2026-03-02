@@ -1774,10 +1774,10 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
               }
             : null,
         elbowed: value === ARROW_TYPE.elbow,
-        dataflowArrow: value === ARROW_TYPE.custom,
+        dataflowArrow: value === ARROW_TYPE.dataflow,
         angle: value === ARROW_TYPE.elbow ? (0 as Radians) : el.angle,
         points:
-          value === ARROW_TYPE.custom || el.dataflowArrow
+          value === ARROW_TYPE.dataflow || el.dataflowArrow
             ? [el.points[0], el.points[el.points.length - 1]]
             : value === ARROW_TYPE.elbow || el.elbowed
             ? [
@@ -1804,15 +1804,15 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
               ]
             : el.points,
         startArrowhead:
-          value === ARROW_TYPE.custom
-            ? "custom"
-            : el.startArrowhead !== "custom"
+          value === ARROW_TYPE.dataflow
+            ? "dataflow"
+            : el.startArrowhead !== "dataflow"
             ? el.startArrowhead
             : null,
         endArrowhead:
-          value === ARROW_TYPE.custom
-            ? "custom"
-            : el.endArrowhead !== "custom"
+          value === ARROW_TYPE.dataflow
+            ? "dataflow"
+            : el.endArrowhead !== "dataflow"
             ? el.endArrowhead
             : "arrow",
       });
@@ -1974,7 +1974,7 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
                 testId: "elbow-arrow",
               },
               {
-                value: ARROW_TYPE.custom,
+                value: ARROW_TYPE.dataflow,
                 text: t("labels.arrowtype_custom"),
                 icon: sharpArrowIcon,
                 testId: "custom-arrow",
@@ -1986,7 +1986,7 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
               (element) => {
                 if (isArrowElement(element)) {
                   return element.dataflowArrow
-                    ? ARROW_TYPE.custom
+                    ? ARROW_TYPE.dataflow
                     : element.elbowed
                     ? ARROW_TYPE.elbow
                     : element.roundness

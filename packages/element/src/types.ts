@@ -316,7 +316,7 @@ export type Arrowhead =
   | "crowfoot_one"
   | "crowfoot_many"
   | "crowfoot_one_or_many"
-  | "custom";
+  | "dataflow";
 
 export type ExcalidrawLinearElement = _ExcalidrawElementBase &
   Readonly<{

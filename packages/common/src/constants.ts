@@ -484,7 +484,7 @@ export const ARROW_TYPE: { [T in AppState["currentItemArrowType"]]: T } = {
   sharp: "sharp",
   round: "round",
   elbow: "elbow",
-  custom: "custom",
+  dataflow: "dataflow",
 };
 
 export const DEFAULT_REDUCED_GLOBAL_ALPHA = 0.3;
