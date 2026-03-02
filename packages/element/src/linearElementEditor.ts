@@ -60,7 +60,12 @@ import {
 import { headingIsHorizontal, vectorToHeading } from "./heading";
 import { mutateElement } from "./mutateElement";
 import { getBoundTextElement, handleBindTextResize } from "./textElement";
-import { isArrowElement, isBindingElement, isCustomArrow, isElbowArrow } from "./typeChecks";
+import {
+  isArrowElement,
+  isBindingElement,
+  isDataflowArrow,
+  isElbowArrow,
+} from "./typeChecks";
 
 import { ShapeCache, toggleLinePolygonState } from "./shape";
 
@@ -758,8 +763,8 @@ export class LinearElementEditor {
     ) {
       return [];
     }
-    
-    if (isCustomArrow(element)) {
+
+    if (isDataflowArrow(element)) {
       return [];
     }
 

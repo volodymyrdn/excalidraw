@@ -28,7 +28,7 @@ import {
 import {
   canBecomePolygon,
   getNonDeletedElements,
-  isCustomArrow,
+  isDataflowArrow,
 } from "@excalidraw/element";
 
 import {
@@ -1676,7 +1676,7 @@ export const actionChangeArrowhead = register<{
     const selectedElements = elements.filter(
       (el) => appState.selectedElementIds[el.id],
     );
-    if (selectedElements?.some(isCustomArrow)) {
+    if (selectedElements?.some(isDataflowArrow)) {
       return null;
     }
 

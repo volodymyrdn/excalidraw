@@ -46,7 +46,7 @@ import { elementWithCanvasCache } from "./renderElement";
 
 import {
   canBecomePolygon,
-  isCustomArrow,
+  isDataflowArrow,
   isElbowArrow,
   isEmbeddableElement,
   isIframeElement,
@@ -787,7 +787,7 @@ const _generateElementShape = (
         ? element.points
         : [pointFrom<LocalPoint>(0, 0)];
 
-      if (isCustomArrow(element)) {
+      if (isDataflowArrow(element)) {
         // arrow start and end points
         const ps = points[0];
         const pe = points[points.length - 1];

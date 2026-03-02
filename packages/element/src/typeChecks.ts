@@ -149,7 +149,7 @@ export const isCurvedArrow = (
   );
 };
 
-export const isCustomArrow = (
+export const isDataflowArrow = (
   element?: ExcalidrawElement,
 ): element is ExcalidrawArrowElement => {
   return isArrowElement(element) && element.custom;

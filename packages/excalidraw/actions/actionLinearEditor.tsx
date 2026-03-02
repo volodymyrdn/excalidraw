@@ -1,5 +1,5 @@
 import {
-  isCustomArrow,
+  isDataflowArrow,
   isElbowArrow,
   isLinearElement,
   isLineElement,
@@ -93,7 +93,7 @@ export const actionToggleLinearEditor = register({
       return null;
     }
 
-    if (isCustomArrow(selectedElement)) {
+    if (isDataflowArrow(selectedElement)) {
       return null;
     }
 
