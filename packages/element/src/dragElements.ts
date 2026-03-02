@@ -213,10 +213,38 @@ const updateElementCoords = (
   const nextX = originalElement.x + dragOffset.x;
   const nextY = originalElement.y + dragOffset.y;
 
-  scene.mutateElement(element, {
-    x: nextX,
-    y: nextY,
-  });
+  const frame = scene
+    .getNonDeletedElements()
+    .findLast(
+      (el) =>
+        el.type === "frame" &&
+        el.id !== originalElement.id &&
+        el.x <= originalElement.x &&
+        el.x + el.width >= originalElement.x + originalElement.width &&
+        el.y <= originalElement.y &&
+        el.y + el.height >= originalElement.y + originalElement.height,
+    );
+
+  if (frame) {
+    const boundedX = Math.max(
+      frame.x,
+      Math.min(frame.x + frame.width - originalElement.width, nextX),
+    );
+    const boundedY = Math.max(
+      frame.y,
+      Math.min(frame.y + frame.height - originalElement.height, nextY),
+    );
+
+    scene.mutateElement(element, {
+      x: boundedX,
+      y: boundedY,
+    });
+  } else {
+    scene.mutateElement(element, {
+      x: nextX,
+      y: nextY,
+    });
+  }
 };
 
 export const getDragOffsetXY = (
