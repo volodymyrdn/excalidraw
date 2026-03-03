@@ -722,6 +722,7 @@ export const getArrowheadSize = (arrowhead: Arrowhead): number => {
     case "crowfoot_one_or_many":
       return 20;
     case "dataflow":
+    case "dataflow_outline":
       return 45;
     default:
       return 15;

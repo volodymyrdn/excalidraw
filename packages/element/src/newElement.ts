@@ -517,8 +517,16 @@ export const newArrowElement = <T extends boolean>(
     points: opts.points || [],
     startBinding: null,
     endBinding: null,
-    startArrowhead: opts.startArrowhead || null,
-    endArrowhead: opts.endArrowhead || null,
+    startArrowhead: ["dataflow", "dataflow_outline"].includes(
+      opts.startArrowhead ?? "",
+    )
+      ? null
+      : opts.startArrowhead || null,
+    endArrowhead: ["dataflow", "dataflow_outline"].includes(
+      opts.endArrowhead ?? "",
+    )
+      ? "arrow"
+      : opts.endArrowhead || null,
     elbowed: false,
     dataflowArrow: false,
   } as T extends true

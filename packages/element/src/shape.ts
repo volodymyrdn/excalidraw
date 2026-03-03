@@ -336,7 +336,8 @@ const getArrowheadShapes = (
     : element.strokeColor;
 
   switch (arrowhead) {
-    case "dataflow": {
+    case "dataflow":
+    case "dataflow_outline": {
       const [x, y, x2, y2, x3, y3] = arrowheadPoints;
 
       // always use solid stroke for arrowhead
@@ -352,7 +353,7 @@ const getArrowheadShapes = (
           ],
           {
             ...options,
-            fill: position === "start" ? "white" : strokeColor,
+            fill: arrowhead === "dataflow_outline" ? "white" : strokeColor,
             fillStyle: "solid",
             roughness: Math.min(1, options.roughness || 0),
           },

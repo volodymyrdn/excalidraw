@@ -1553,6 +1553,23 @@ export const actionChangeRoundness = register<"sharp" | "round">({
   },
 });
 
+const getDataflowArrowHeadOptions = (flip: boolean) => {
+  return [
+    {
+      value: "dataflow",
+      text: t("labels.arrowhead_triangle"),
+      icon: <ArrowheadTriangleIcon flip={flip} />,
+      keyBinding: "e",
+    },
+    {
+      value: "dataflow_outline",
+      text: t("labels.arrowhead_triangle_outline"),
+      icon: <ArrowheadTriangleOutlineIcon flip={flip} />,
+      keyBinding: "r",
+    },
+  ] as const;
+};
+
 const getArrowheadOptions = (flip: boolean) => {
   return [
     {
@@ -1676,9 +1693,7 @@ export const actionChangeArrowhead = register<{
     const selectedElements = elements.filter(
       (el) => appState.selectedElementIds[el.id],
     );
-    if (selectedElements?.some(isDataflowArrow)) {
-      return null;
-    }
+    const isDataFlow = selectedElements?.some(isDataflowArrow);
 
     return (
       <fieldset>
@@ -1686,7 +1701,11 @@ export const actionChangeArrowhead = register<{
         <div className="iconSelectList buttonList">
           <IconPicker
             label="arrowhead_start"
-            options={getArrowheadOptions(!isRTL)}
+            options={
+              isDataFlow
+                ? getDataflowArrowHeadOptions(!isRTL)
+                : getArrowheadOptions(!isRTL)
+            }
             value={getFormValue<Arrowhead | null>(
               elements,
               app,
@@ -1704,7 +1723,11 @@ export const actionChangeArrowhead = register<{
           <IconPicker
             label="arrowhead_end"
             group="arrowheads"
-            options={getArrowheadOptions(!!isRTL)}
+            options={
+              isDataFlow
+                ? getDataflowArrowHeadOptions(!!isRTL)
+                : getArrowheadOptions(!!isRTL)
+            }
             value={getFormValue<Arrowhead | null>(
               elements,
               app,
@@ -1806,15 +1829,15 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
         startArrowhead:
           value === ARROW_TYPE.dataflow
             ? "dataflow"
-            : el.startArrowhead !== "dataflow"
-            ? el.startArrowhead
-            : null,
+            : ["dataflow", "dataflow_outline"].includes(el.startArrowhead ?? "")
+            ? null
+            : el.startArrowhead,
         endArrowhead:
           value === ARROW_TYPE.dataflow
             ? "dataflow"
-            : el.endArrowhead !== "dataflow"
-            ? el.endArrowhead
-            : "arrow",
+            : ["dataflow", "dataflow_outline"].includes(el.endArrowhead ?? "")
+            ? "arrow"
+            : el.endArrowhead,
       });
 
       if (isElbowArrow(newElement)) {
