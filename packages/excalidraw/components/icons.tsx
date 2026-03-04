@@ -2258,6 +2258,17 @@ export const sharpArrowIcon = createIcon(
   tablerIconProps,
 );
 
+// arrow-up-right (modified)
+export const dataflowArrowIcon = createIcon(
+  <g>
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M6 18l12 -12" />
+    <path d="M18 10v-4h-4" />
+    <path d="M6 14v4h4" />
+  </g>,
+  tablerIconProps,
+);
+
 // arrow-guide (modified)
 export const elbowArrowIcon = createIcon(
   <g>

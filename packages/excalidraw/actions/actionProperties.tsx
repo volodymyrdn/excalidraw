@@ -131,6 +131,7 @@ import {
   ArrowheadCrowfootIcon,
   ArrowheadCrowfootOneIcon,
   ArrowheadCrowfootOneOrManyIcon,
+  dataflowArrowIcon,
 } from "../components/icons";
 
 import { Fonts } from "../fonts";
@@ -1999,7 +2000,7 @@ export const actionChangeArrowType = register<keyof typeof ARROW_TYPE>({
               {
                 value: ARROW_TYPE.dataflow,
                 text: t("labels.arrowtype_dataflow"),
-                icon: sharpArrowIcon,
+                icon: dataflowArrowIcon,
                 testId: "dataflow-arrow",
               },
             ]}
